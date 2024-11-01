@@ -1,3 +1,29 @@
 :root {
+    /* Общие цвета проекта */
+    --base--text-color: #d9d9d9;
+    --base--card-color: #000000;
+    --base-accent-color: #2AADD9;
+    --base--card-opacity: 70%;
 
+    /* Цвета проекта для светлой темы */
+    --light-background-color: #d9d9d9;
+    --light-text-color: #000000;
+
+
+    /* Цвета проекта для темной темы */
+    --dark-background-color: #282828;
+    --dark-text-color: #d9d9d9;
+
+    /* Кнопка переключения темы */
+    --blue-background: #C2E9F6;
+    --blue-border: #72cce3;
+    --blue-color: #96dcee;
+    --yellow-background: #fffaa8;
+    --yellow-border: #f5eb71;
+    --indigo-background: #808fc7;
+    --indigo-border: #5d6baa;
+    --indigo-color: #6b7abb;
+    --gray-border: #e8e8ea;
+    --gray-dots: #e8e8ea;
+    --white: #fff;
 }
