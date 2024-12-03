@@ -1,4 +1,5 @@
 <script setup>
+import { ref } from 'vue';
 
 const emit = defineEmits(['toggleTheme']);
 
@@ -12,140 +13,106 @@ const props = defineProps({
 const toggleTheme = () => {
   emit('toggleTheme', props.theme === 'light' ? 'dark' : 'light');
 };
+
+const isMenuOpen = ref(false);
+
+const toggleMenu = () => {
+  isMenuOpen.value = !isMenuOpen.value;
+};
 </script>
 
 <template>
     <body>
-        <input type="checkbox" id="check">
-        <label for="check">
-            <i class="menu-button" id="btn"><img class="menu-icon" src="../assets/svg/menu-svgrepo-com.svg" alt=""></i>
-            <i class="close-button" id="cancel"><img class="close-icon" src="../assets/svg/close-svgrepo-com.svg" alt=""></i>
-        </label>
-        <div class="sidebar">
-            <header>Menu</header>
-            <a href="#" class="active">
-                <span>Home</span>
-            </a>
-            <a href="#">
-                <span>About</span>
-            </a>
-            <a href="#">
-                <span>Portfolio</span>
-            </a>
-            <div class="wrapper">
-                <input type="checkbox" name="checkbox" class="switch" @change="toggleTheme" />
+        <div class="container">
+            <div class="menu__open-button">
+                    <img class="menu__open-img" @click="toggleMenu" src="../assets/svg/menu-svgrepo-com.svg" alt="">
+            </div>
+            <div class="menu-container" :class="{ 'menu-container_open': isMenuOpen }">
+                <div class="wrapper">
+                    <input type="checkbox" name="checkbox" class="switch" @change="toggleTheme" />
+                </div>
+                <div class="menu-block">
+                    <ul class="menu__list">
+                        <li class="menu_item">Home</li>
+                        <li class="menu_item">About</li>
+                        <li class="menu_item">Portfolio</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </body>
 </template>
 
 <style scoped>
-
-#check{
-    display: none;
+.container {
+    position: relative;
+    height: 100vh;
 }
 
-label #btn,label #cancel{
+.menu-container {
+    display: flex;
+    align-items: center;
+    position: fixed;
+    width: 70px;
+    height: 70px;
+    top: 35px;
+    right: 35px;
+    border: 1px solid white;
+    border-radius: 10px;
+    transition: width 0.3s ease-in-out;
+    overflow: hidden;
+    z-index: 1;
+    padding-left: 70px;
+}
+
+.menu-container::before {
+    content: "";
     position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: 70%;
+    border-radius: inherit;
+}
+
+.menu-container_open {
+    width: calc(100% - 70px);
+    padding-left: 0px;
+}
+
+.menu__open-button {
+    position: fixed;
+    top: 43px;
+    right: 43px;
+    z-index: 2;
     display: flex;
     align-items: center;
     justify-content: center;
-    right: 0;
+}
+
+.menu__open-img {
+    height: 55px;
+    width: 55px;
+    color: white;
+    opacity: 80%;
     cursor: pointer;
-    margin: 20px 0px;
-    border-top: 1px solid var(--base--text-color);
-    border-bottom: 1px solid var(--base--text-color);
-    border-left: 1px solid var(--base--text-color);
-    background-color: var(--base--card-color);
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
-    height: 60px;
-    width: 60px;
-    transition: all .5s ease;
-}
-
-.menu-icon {
-    height: 50px;
-    width: 50px;
     transition: transform 0.1s ease-in-out;
-}
 
-.close-icon {
-    height: 45px;
-    width: 45px;
-    transition: transform 0.1s ease-in-out;
-}
+    &:hover {
+        opacity: 1;
+	}
 
-.menu-button:active .menu-icon,
-.close-button:active .close-icon {
-  transform: scale(0.8);
-}
-
-label #cancel{
-    visibility: hidden;
-}
-
-#check:checked ~ .sidebar{
-    right: 0;
-}
-
-#check:checked ~ label #btn{
-    margin-right: 131px;
-    visibility: hidden;
-}
-
-#check:checked ~ label #cancel{
-    margin-right: 131px;
-    visibility: visible;
-}
-
-.sidebar{
-    position: fixed;
-    width: 130px;
-    right: -131px;
-    height: 100%;
-    border-left: 1px solid var(--base--text-color);
-    background-color: var(--base--card-color);
-    opacity: var(--base--card-opacity);
-    transition: all .5s ease;
-}
-
-.sidebar header{
-    font-size: 28px;
-    color: var(--base--text-color);
-    line-height: 70px;
-    text-align: center;
-    user-select: none;
-    font-family: 'Lato', sans-serif;
-}
-
-.sidebar a {
-    display: flex;
-    justify-content: center;
-    color: var(--base--text-color);
-    line-height: 65px;
-    font-family: 'Lato', sans-serif;
-    transition: all .5s ease;
-}
-
-a.active {
-    color: var(--base-accent-color);
-}
-
-.sidebar a i {
-    font-size: 23px;
-    margin-right: 16px;
-}
-
-.sidebar a span {
-    text-transform: uppercase;
+    &:active {
+        transform: scale(0.9);
+    }
 }
 
 .wrapper {
-    position: absolute;
-    left: 25%;
-    bottom: 0;
-    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
 }
 
 .switch{
@@ -308,12 +275,148 @@ a.active {
     }
 }
 
-@media (width >= 1200px) {
+.menu-block {
+    display: flex;
+    align-items: center;
+    margin-left: 30px;
+    margin-right: 90px;
+    width: 100%;
+    z-index: 3;
 }
 
-@media (600px <= width < 1200px) {
+.menu__list {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    width: 100%;
+    padding: 0;
 }
 
-@media (width <= 599px) {
+.menu_item {
+    margin-right: 50px;
+    color: white;
+    opacity: 80%;
+    font-size: 30px;
+    cursor: pointer;
+
+    &:hover {
+        opacity: 1;
+	}
+
+    &:active {
+        transform: scale(0.9);
+    }
+}
+
+.menu_item:last-child {
+    margin-right: 0; 
+}
+
+@media (max-width: 1024px) {
+    .menu-container {
+        width: 60px;
+        height: 60px;
+        top: 25px;
+        right: 25px;
+        padding-left: 50px;
+    }
+
+    .menu-container_open {
+        width: calc(100% - 50px);
+        padding-left: 0px;
+    }
+
+    .menu__open-button {
+        top: 30px;
+        right: 30px;
+    }
+
+    .menu__open-img {
+        height: 50px;
+        width: 50px;
+    }
+
+    .menu__list {
+        justify-content: space-around;
+    }
+
+    .menu_item {
+        margin-right: 0px;
+        font-size: 38px;
+    }
+}
+
+@media (max-width: 768px) {
+    .menu-container {
+        width: 50px;
+        height: 50px;
+        top: 20px;
+        right: 20px;
+        padding-left: 50px;
+    }
+
+    .menu-container_open {
+        width: calc(100% - 40px);
+        padding-left: 0px;
+    }
+
+    .menu__open-button {
+        top: 25px;
+        right: 25px;
+    }
+
+    .menu__open-img {
+        height: 40px;
+        width: 40px;
+    }
+
+    .menu-block {
+        margin-left: 10px;
+        margin-right: 50px;
+    }
+
+    .menu_item {
+        font-size: 30px;
+    }
+}
+
+@media (max-width: 520px) {
+    .menu_item {
+        font-size: 22px;
+    }
+}
+
+@media (max-width: 375px) {
+    .menu-container {
+        width: 50px;
+        height: 50px;
+        top: 10px;
+        right: 10px;
+        padding-left: 50px;
+    }
+
+    .menu-container_open {
+        width: calc(100% - 20px);
+        padding-left: 0px;
+    }
+
+    .menu__open-button {
+        top: 16px;
+        right: 16px;
+    }
+
+    .menu__open-img {
+        height: 40px;
+        width: 40px;
+    }
+
+    .menu-block {
+        margin-left: 10px;
+        margin-right: 50px;
+    }
+
+    .menu_item {
+        font-size: 18px;
+    }
 }
 </style>
