@@ -27,6 +27,10 @@ const dayVideo = ref(null);
 
 <style scoped>
 
+body {
+  background-color: azure;
+}
+
 video {
     position: absolute;
     transform: scaleX(-1);
