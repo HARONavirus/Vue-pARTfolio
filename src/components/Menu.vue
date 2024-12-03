@@ -44,6 +44,8 @@ const toggleMenu = () => {
 </template>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans+Caption:wght@400;700&display=swap');
+
 .container {
     position: relative;
     height: 100vh;
@@ -293,6 +295,9 @@ const toggleMenu = () => {
 }
 
 .menu_item {
+    font-family: "PT Sans Caption", serif;
+    font-style: normal;
+    font-weight: 400;
     margin-right: 50px;
     color: white;
     opacity: 80%;

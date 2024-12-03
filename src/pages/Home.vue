@@ -28,7 +28,7 @@ const dayVideo = ref(null);
 <style scoped>
 
 body {
-  background-color: azure;
+  background-color: black;
 }
 
 video {
