@@ -33,9 +33,9 @@ const toggleMenu = () => {
                 </div>
                 <div class="menu-block">
                     <ul class="menu__list">
-                        <li class="menu_item">Home</li>
-                        <li class="menu_item">About</li>
-                        <li class="menu_item">Portfolio</li>
+                        <li class="menu__item-text">Home</li>
+                        <li class="menu__item-text">About</li>
+                        <li class="menu__item-text">Portfolio</li>
                     </ul>
                 </div>
             </div>
@@ -294,7 +294,7 @@ const toggleMenu = () => {
     padding: 0;
 }
 
-.menu_item {
+.menu__item-text {
     font-family: "PT Sans Caption", serif;
     font-style: normal;
     font-weight: 400;
@@ -313,7 +313,7 @@ const toggleMenu = () => {
     }
 }
 
-.menu_item:last-child {
+.menu__item-text:last-child {
     margin-right: 0; 
 }
 
@@ -345,7 +345,7 @@ const toggleMenu = () => {
         justify-content: space-around;
     }
 
-    .menu_item {
+    .menu__item-text {
         margin-right: 0px;
         font-size: 38px;
     }
@@ -380,13 +380,13 @@ const toggleMenu = () => {
         margin-right: 50px;
     }
 
-    .menu_item {
+    .menu__item-text {
         font-size: 30px;
     }
 }
 
 @media (max-width: 520px) {
-    .menu_item {
+    .menu__item-text {
         font-size: 22px;
     }
 }
@@ -420,7 +420,7 @@ const toggleMenu = () => {
         margin-right: 50px;
     }
 
-    .menu_item {
+    .menu__item-text {
         font-size: 18px;
     }
 }
