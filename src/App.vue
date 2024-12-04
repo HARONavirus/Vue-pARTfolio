@@ -24,7 +24,7 @@ const dayVideo = ref(null);
       </video>
     </body>
     <RouterView />
-  </template>
+</template>
 
 <style scoped>
 

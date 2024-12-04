@@ -33,9 +33,15 @@ const toggleMenu = () => {
                 </div>
                 <div class="menu-block">
                     <ul class="menu__list">
-                        <li class="menu__item-text">Home</li>
-                        <li class="menu__item-text">About</li>
-                        <li class="menu__item-text">Portfolio</li>
+                        <router-link to="/" :class="{ activePage: $route.path === '/' }" style="text-decoration: none;">
+                            <li class="menu__item-text">Home</li>
+                        </router-link>
+                        <router-link to="/about" :class="{ activePage: $route.path === '/about' }" style="text-decoration: none;">
+                            <li class="menu__item-text">About</li>
+                        </router-link>
+                        <router-link to="/portfolio" :class="{ activePage: $route.path === '/portfolio' }" style="text-decoration: none;">
+                            <li class="menu__item-text">Portfolio</li>
+                        </router-link>
                     </ul>
                 </div>
             </div>
@@ -288,6 +294,8 @@ const toggleMenu = () => {
 
 .menu__list {
     display: flex;
+    flex-direction: row;
+    gap: 50px;
     align-items: center;
     list-style: none;
     width: 100%;
@@ -298,7 +306,6 @@ const toggleMenu = () => {
     font-family: "PT Sans Caption", serif;
     font-style: normal;
     font-weight: 400;
-    margin-right: 50px;
     color: white;
     opacity: 80%;
     font-size: 30px;
@@ -313,8 +320,8 @@ const toggleMenu = () => {
     }
 }
 
-.menu__item-text:last-child {
-    margin-right: 0; 
+.activePage .menu__item-text {
+    color: #2aadd9;
 }
 
 @media (max-width: 1024px) {
