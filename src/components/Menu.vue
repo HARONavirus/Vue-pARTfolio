@@ -33,13 +33,13 @@ const toggleMenu = () => {
         </div>
         <div class="menu-block" :style="{ display: isMenuOpen ? 'block' : 'none' }">
           <ul class="menu__list">
-            <router-link to="/" :class="{ activePage: $route.path === '/' }" style="text-decoration: none;">
+            <router-link to="/" :class="{ activePage: $route.path === '/' }" style="text-decoration: none;" @click="toggleMenu">
               <li class="menu__item-text">Home</li>
             </router-link>
-            <router-link to="/about" :class="{ activePage: $route.path === '/about' }" style="text-decoration: none;">
+            <router-link to="/about" :class="{ activePage: $route.path === '/about' }" style="text-decoration: none;" @click="toggleMenu">
               <li class="menu__item-text">About</li>
             </router-link>
-            <router-link to="/portfolio" :class="{ activePage: $route.path === '/portfolio' }" style="text-decoration: none;">
+            <router-link to="/portfolio" :class="{ activePage: $route.path === '/portfolio' }" style="text-decoration: none;" @click="toggleMenu">
               <li class="menu__item-text">Portfolio</li>
             </router-link>
           </ul>
@@ -67,7 +67,7 @@ const toggleMenu = () => {
     right: 35px;
     border: 1px solid white;
     border-radius: 10px;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.9);
     transition: width 0.4s ease-in-out, height 0.4s ease-in-out;
     overflow: hidden;
     z-index: 1;

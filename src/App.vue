@@ -34,10 +34,11 @@ body {
 }
 
 video {
-    position: absolute;
+    position: fixed;
     transform: scaleX(-1);
     object-fit: cover;
     object-position: 90%;
+    overflow: hidden;
     top: 0;
     left: 0;
     width: 100%;
