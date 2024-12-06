@@ -22,31 +22,31 @@ const toggleMenu = () => {
 </script>
 
 <template>
-    <body>
-        <div class="container">
-            <div class="menu__open-button">
-                    <img class="menu__open-img" @click="toggleMenu" src="../assets/svg/menu-svgrepo-com.svg" alt="">
-            </div>
-            <div class="menu-container" :class="{ 'menu-container_open': isMenuOpen }">
-                <div class="wrapper">
-                    <input type="checkbox" name="checkbox" class="switch" @change="toggleTheme" />
-                </div>
-                <div class="menu-block">
-                    <ul class="menu__list">
-                        <router-link to="/" :class="{ activePage: $route.path === '/' }" style="text-decoration: none;">
-                            <li class="menu__item-text">Home</li>
-                        </router-link>
-                        <router-link to="/about" :class="{ activePage: $route.path === '/about' }" style="text-decoration: none;">
-                            <li class="menu__item-text">About</li>
-                        </router-link>
-                        <router-link to="/portfolio" :class="{ activePage: $route.path === '/portfolio' }" style="text-decoration: none;">
-                            <li class="menu__item-text">Portfolio</li>
-                        </router-link>
-                    </ul>
-                </div>
-            </div>
+  <body>
+    <div class="container">
+      <div class="menu__open-button" @click="toggleMenu">
+        <img class="menu__open-img" src="../assets/svg/menu-svgrepo-com.svg" alt="">
+      </div>
+      <div class="menu-container" :class="{ 'menu-container_open': isMenuOpen }">
+        <div class="menu-wrapper" :style="{ display: isMenuOpen ? 'block' : 'none' }">
+          <input type="checkbox" name="checkbox" class="switch" @change="toggleTheme" />
         </div>
-    </body>
+        <div class="menu-block" :style="{ display: isMenuOpen ? 'block' : 'none' }">
+          <ul class="menu__list">
+            <router-link to="/" :class="{ activePage: $route.path === '/' }" style="text-decoration: none;">
+              <li class="menu__item-text">Home</li>
+            </router-link>
+            <router-link to="/about" :class="{ activePage: $route.path === '/about' }" style="text-decoration: none;">
+              <li class="menu__item-text">About</li>
+            </router-link>
+            <router-link to="/portfolio" :class="{ activePage: $route.path === '/portfolio' }" style="text-decoration: none;">
+              <li class="menu__item-text">Portfolio</li>
+            </router-link>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </body>
 </template>
 
 <style scoped>
@@ -67,22 +67,11 @@ const toggleMenu = () => {
     right: 35px;
     border: 1px solid white;
     border-radius: 10px;
-    transition: width 0.3s ease-in-out;
+    background-color: rgba(0, 0, 0, 0.7);
+    transition: width 0.4s ease-in-out, height 0.4s ease-in-out;
     overflow: hidden;
     z-index: 1;
     padding-left: 70px;
-}
-
-.menu-container::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: black;
-    opacity: 70%;
-    border-radius: inherit;
 }
 
 .menu-container_open {
@@ -117,7 +106,7 @@ const toggleMenu = () => {
     }
 }
 
-.wrapper {
+.menu-wrapper {
     display: flex;
     align-items: center;
     margin-left: 10px;
@@ -392,24 +381,25 @@ const toggleMenu = () => {
     }
 }
 
-@media (max-width: 520px) {
-    .menu__item-text {
-        font-size: 22px;
-    }
-}
-
-@media (max-width: 375px) {
+@media (max-width: 600px) {
     .menu-container {
+        align-items: start;
         width: 50px;
         height: 50px;
         top: 10px;
         right: 10px;
         padding-left: 50px;
+        background-color: rgba(0, 0, 0, 0.9);
     }
 
     .menu-container_open {
         width: calc(100% - 20px);
+        height: 275px;
         padding-left: 0px;
+    }
+
+    .menu-wrapper {
+        margin-top: 16px;
     }
 
     .menu__open-button {
@@ -423,12 +413,45 @@ const toggleMenu = () => {
     }
 
     .menu-block {
-        margin-left: 10px;
-        margin-right: 50px;
+        position: absolute;
+        top: 10%;
     }
 
-    .menu__item-text {
-        font-size: 18px;
+    .menu__list {
+        flex-direction: column;
     }
 }
+
+@media (max-width: 400px) {
+    .menu-container {
+        align-items: start;
+        width: 50px;
+        height: 50px;
+        top: 10px;
+        right: 10px;
+        padding-left: 50px;
+        background-color: rgba(0, 0, 0, 0.9);
+    }
+
+    .menu-container_open {
+        width: calc(100% - 20px);
+        height: 275px;
+        padding-left: 0px;
+    }
+
+    .menu-wrapper {
+        margin-top: 16px;
+    }
+
+    .menu__open-button {
+        top: 16px;
+        right: 16px;
+    }
+
+    .menu__open-img {
+        height: 40px;
+        width: 40px;
+    }
+}
+
 </style>
